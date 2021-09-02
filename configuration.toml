@@ -1,0 +1,79 @@
+[Writable]
+ScheduleIntervalTime = 500
+LogLevel = "INFO"
+
+[Clients]
+  [Clients.Logging]
+  Host = "localhost"
+  Port = 48061
+  Protocol = "http"
+
+[Databases]
+  [Databases.Primary]
+  Username = "scheduler"
+  Password = "password"
+  Type = "redisdb"
+  Timeout = 5000
+  Host = "edgex-redis"
+  Port = 6379
+  Name = "scheduler"
+
+[Logging]
+EnableRemote = false
+File = ""
+
+[Registry]
+Host = "edgex-core-consul"
+Port = 8500
+Type = "consul"
+
+[Service]
+BootTimeout = 30000
+CheckInterval = "10s"
+ClientMonitor = 15000
+Host = "edgex-support-scheduler"
+Port = 48085
+Protocol = "http"
+StartupMsg = "This is the Support Scheduler Microservice"
+MaxResultCount = 50000
+Timeout = 5000
+
+[Intervals]
+  [Intervals.Morning]
+  Name = "morning"
+  Start = "20210324T130000"
+  End = ""
+  Frequency = "24h"
+  Cron = ""
+  RunOnce = false
+
+[IntervalActions]
+  [IntervalActions.ScrubAged]
+  Host = "edgex-core-data"
+  Port = 48080
+  Protocol = "http"
+  Name = "scrub-aged-events-01"
+  Method = "DELETE"
+  Target = "core-data"
+  Parameters = ""
+  Path = "/api/v1/event/removeold/age/60000"
+  Interval = "morning"
+
+[SecretStore]
+Host = "edgex-vault"
+Port = 8200
+Path = "/v1/secret/edgex/scheduler/"
+Protocol = "https"
+Namespace = ""
+RootCaCertPath = "/tmp/edgex/secrets/ca/ca.pem"
+ServerName = "edgex-vault"
+AdditionalRetryAttempts = 10
+RetryWaitPeriod = "1s"
+TokenFile = "/tmp/edgex/secrets/edgex-support-scheduler/secrets-token.json"
+  [SecretStore.Authentication]
+  AuthType = "X-Vault-Token"
+  AuthToken = ""
+
+[Startup]
+Duration = 30
+Interval = 1
