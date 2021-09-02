@@ -41,7 +41,7 @@ Timeout = 5000
 [Intervals]
   [Intervals.Morning]
   Name = "morning"
-  Start = "20210324T130000"
+  Start = "20210902T130000"
   End = ""
   Frequency = "24h"
   Cron = ""
