@@ -433,7 +433,7 @@ services:
     volumes:
       - /tmp/edgex/secrets/ca:/tmp/edgex/secrets/ca:ro,z
       - /tmp/edgex/secrets/edgex-support-scheduler:/tmp/edgex/secrets/edgex-support-scheduler:ro,z
-#      - /home/marialuisa/scheduler/res/configuration.toml:/res/configuration.toml
+      - /home/marialuisa/scheduler/res/configuration.toml:/res/configuration.toml
     depends_on:
       - consul
 #      - logging  # uncomment if re-enabled remote logging
