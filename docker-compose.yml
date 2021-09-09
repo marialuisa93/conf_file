@@ -552,7 +552,7 @@ services:
   device-mqtt:
     image: edgexfoundry/docker-device-mqtt-go:1.2.1
     ports:
-      - "49982:49982"
+      - "49983:49983"
     container_name: edgex-device-mqtt
     hostname: edgex-device-mqtt
     networks:
